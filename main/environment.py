@@ -1,184 +1,8 @@
 from Options import *
+from Map import *
+from Card import *
 
 options = Options()
-
-class Map:
-    def __init__(self, mapIdx):
-        self.plate = [
-            [1, 1, 0, 0, 1, 1],
-            [1, 0, 0, 0, 0, 1],
-            [0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0],
-            [1, 0, 0, 0, 0, 1],
-            [1, 1, 0, 0, 1, 1],
-        ]
-
-        self.HEIGHT = len(self.plate)  # 그리드 세로
-        self.WIDTH = len(self.plate)  # 그리드 가로
-        self.reRoll = 3
-        self.maxPlayTime = 9
-
-
-class Card:
-    def __init__(self, card, cardLevel=1):
-        super(Card, self).__init__()
-        self.cardType = card
-        self.level = cardLevel
-        self.maxLevel = 3 if (
-                self.cardType != CardType.WORLDTREE.value and self.cardType != CardType.ERUPTION.value) else 1
-        self.imageList = self.LoadCardImages()
-        self.image = self.imageList[card]
-        self.effect = self.CardEffect()
-
-    def LevelUp(self):
-        self.level = self.level + 1
-        self.effect = self.CardEffect()
-
-    def LoadCardImages(self):
-        THUNDERSTROKE = PhotoImage(
-            Image.open("../PracticeImg/낙뢰.png").resize((30, 30)))
-        EXPLOSION = PhotoImage(
-            Image.open("../PracticeImg/대폭발.png").resize((30, 30)))
-        THUNDERBOLT = PhotoImage(
-            Image.open("../PracticeImg/벼락.png").resize((30, 30)))
-        FIREWORKS = PhotoImage(
-            Image.open("../PracticeImg/업화.png").resize((30, 30)))
-        WATERSPOUT = PhotoImage(
-            Image.open("../PracticeImg/용오름.png").resize((30, 30)))
-        PURIFICATION = PhotoImage(
-            Image.open("../PracticeImg/정화.png").resize((30, 30)))
-        EARTHQUAKE = PhotoImage(
-            Image.open("../PracticeImg/지진.png").resize((30, 30)))
-        SHOKEWAVE = PhotoImage(
-            Image.open("../PracticeImg/충격파.png").resize((30, 30)))
-        STORM = PhotoImage(
-            Image.open("../PracticeImg/폭풍우.png").resize((30, 30)))
-        TSUNAMI = PhotoImage(
-            Image.open("../PracticeImg/해일.png").resize((30, 30)))
-        WORLDTREE = PhotoImage(
-            Image.open("../PracticeImg/분출.png").resize((30, 30)))
-        ERUPTION = PhotoImage(
-            Image.open("../PracticeImg/세계수의공명.png").resize((30, 30)))
-
-        return THUNDERSTROKE, EXPLOSION, THUNDERBOLT, FIREWORKS, WATERSPOUT, PURIFICATION, EARTHQUAKE, SHOKEWAVE, STORM, TSUNAMI, WORLDTREE, ERUPTION
-
-    def CardEffect(self):
-        lst = dict()
-        if self.cardType == CardType.THUNDERSTROKE.value:
-            lst['dx'] = [0, 0, 0, -1, 1]
-            lst['dy'] = [-1, 1, 0, 0, 0]
-            lst['percents'] = [50, 50, 100, 50, 50] if self.level == 1 else [100, 100, 100, 100, 100]
-        elif self.cardType == CardType.EXPLOSION.value:
-            lst['dx'] = [0,
-                         1, 2, 3, 4, 5, 6, 7, 8,
-                         -1, -2, -3, -4, -5, -6, -7, -8,
-                         1, 2, 3, 4, 5, 6, 7, 8,
-                         -1, -2, -3, -4, -5, -6, -7, -8,
-                         ]
-            lst['dy'] = [0,
-                         1, 2, 3, 4, 5, 6, 7, 8,
-                         -1, -2, -3, -4, -5, -6, -7, -8,
-                         -1, -2, -3, -4, -5, -6, -7, -8,
-                         1, 2, 3, 4, 5, 6, 7, 8,
-                         ]
-
-            lst['percents'] = [100,
-                               85, 75, 65, 55, 45, 35, 25, 15,
-                               85, 75, 65, 55, 45, 35, 25, 15,
-                               85, 75, 65, 55, 45, 35, 25, 15,
-                               85, 75, 65, 55, 45, 35, 25, 15,
-                               ] if self.level == 1 else [
-                100,
-                100, 100, 100, 100, 100, 100, 100, 100,
-                100, 100, 100, 100, 100, 100, 100, 100,
-                100, 100, 100, 100, 100, 100, 100, 100,
-                100, 100, 100, 100, 100, 100, 100, 100,
-            ]
-        elif self.cardType == CardType.THUNDERBOLT.value:
-            lst['dx'] = []
-            lst['dy'] = []
-            lst['percents'] = []
-        elif self.cardType == CardType.FIREWORKS.value:
-            lst['dx'] = [0,
-                         -1, 0, 1,
-                         -2, -1, 0, 1, 2,
-                         -1, 0, 1,
-                         0]
-            lst['dy'] = [-2,
-                         -1, -1, -1,
-                         0, 0, 0, 0, 0,
-                         1, 1, 1,
-                         2]
-            lst['percents'] = [50,
-                               50, 50, 50,
-                               50, 50, 100, 50, 50,
-                               50, 50, 50,
-                               50, ] if self.level == 1 else [
-                100,
-                100, 100, 100,
-                100, 100, 100, 100, 100,
-                100, 100, 100,
-                100,
-            ]
-        elif self.cardType == CardType.WATERSPOUT.value:
-            lst['dx'] = [-1, -1, 0, 1, 1]
-            lst['dy'] = [-1, 1, 0, -1, 1]
-            lst['percents'] = [50, 50, 100, 50, 50] if self.level == 1 else [100, 100, 100, 100, 100]
-        elif self.cardType == CardType.PURIFICATION.value:
-            lst['dx'] = [-1, 0, 1]
-            lst['dy'] = [0, 0, 0]
-            lst['percents'] = [50, 100, 50]
-        elif self.cardType == CardType.EARTHQUAKE.value:
-            lst['dx'] = [-8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8]
-            lst['dy'] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-            lst['percents'] = [15, 25, 35, 45, 55, 65, 75, 85, 100, 85, 75, 65, 55, 45, 35, 25, 15] \
-                if self.level == 1 else \
-                [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100]
-        elif self.cardType == CardType.SHOKEWAVE.value:
-            lst['dx'] = [-1, 0, 1,
-                         -1, 0, 1,
-                         -1, 0, 1, ]
-            lst['dy'] = [-1, -1, -1,
-                         0, 0, 0,
-                         1, 1, 1, ]
-            lst['percents'] = [75, 75, 75,
-                               75, 100, 75,
-                               75, 75, 75, ] \
-                if self.level == 1 else \
-                [100, 100, 100,
-                 100, 100, 100,
-                 100, 100, 100, ]
-        elif self.cardType == CardType.STORM.value:
-            lst['dx'] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-            lst['dy'] = [-8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8]
-            lst['percents'] = [15, 25, 35, 45, 55, 65, 75, 85, 100, 85, 75, 65, 55, 45, 35, 25, 15] \
-                if self.level == 1 else \
-                [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100]
-        elif self.cardType == CardType.TSUNAMI.value:
-            lst['dx'] = [0,
-                         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                         -8, -7, -6, -5, -4, -3, -2, -1, 1, 2, 3, 4, 5, 6, 7, 8]
-            lst['dy'] = [0,
-                         -8, -7, -6, -5, -4, -3, -2, -1, 1, 2, 3, 4, 5, 6, 7, 8,
-                         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-            lst['percents'] = [100,
-                               85, 75, 65, 55, 45, 35, 25, 15, 15, 25, 35, 45, 55, 65, 75, 85,
-                               85, 75, 65, 55, 45, 35, 25, 15, 15, 25, 35, 45, 55, 65, 75, 85, ] \
-                if self.level == 1 else \
-                [100,
-                 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100,
-                 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, ]
-        elif self.cardType == CardType.WORLDTREE.value:
-            lst['dx'] = [0, 0, -2, -1, 0, 1, 2, 0, 0]
-            lst['dy'] = [-2, -1, 0, 0, 0, 0, 0, 1, 2]
-            lst['percents'] = [100, 100, 100, 100, 100, 100, 100, 100, 100, ]
-        elif self.cardType == CardType.ERUPTION.value:
-            lst['dx'] = [0]
-            lst['dy'] = [0]
-            lst['percents'] = [100]
-
-        return lst
-
 
 class Env(tk.Tk):
     def __init__(self, render_speed=0.01):
@@ -253,8 +77,9 @@ class Env(tk.Tk):
         for y in range(0, len(self.action_space)):
             for x in range(0, len(self.action_space)):
                 tile = self.action_space[int(y)][int(x)]
-                self.canvas.create_image(x * UNIT + UNIT / 2, y * UNIT + UNIT / 2,
-                                         image=self.tileImages[tile])
+                if tile != -1:
+                    self.canvas.create_image(x * UNIT + UNIT / 2, y * UNIT + UNIT / 2,
+                                             image=self.tileImages[tile])
 
     def Draw(self):
         self.DrawGrid()
@@ -316,26 +141,33 @@ class Env(tk.Tk):
             self.action_space[posY][posX] = TileType.BROKENTILE.value
             relocation = True
 
-        # if tile != TileType.BASICTILE.value and tile != TileType.BROKENTILE.value:
-        #     print(f'specialTile Destroyed : {tile}')
         return relocation
 
     def Relocation(self):
         cnt = len(self.breakableTiles) + len(self.distortTiles)
-        positions = np.random.choice(range(0, len(sum(self.action_space, []))), cnt, replace=False)
+        locatable = []
+        for h in range(self.map.HEIGHT):
+            for w in range(self.map.WIDTH):
+                if self.action_space[h][w] != -1:
+                    locatable.append([w, h])
 
-        action_space = [[1 for w in range(self.map.WIDTH)] for h in range(self.map.HEIGHT)]
+        positions = np.random.choice(range(0, len(locatable)), cnt, replace=False)
+
+        action_space = [[1 if self.action_space[h][w] != -1 else -1
+                        for w in range(self.map.WIDTH)]
+                        for h in range(self.map.HEIGHT)]
+
         breakableTile = positions[:len(self.breakableTiles)]
         distortTiles = positions[len(self.breakableTiles):]
 
         for pos in breakableTile:
-            x = int(pos % self.map.WIDTH)
-            y = int(pos / self.map.HEIGHT)
+            x = locatable[pos][0]
+            y = locatable[pos][1]
             action_space[y][x] = TileType.BASICTILE.value
 
         for pos in distortTiles:
-            x = int(pos % self.map.WIDTH)
-            y = int(pos / self.map.HEIGHT)
+            x = locatable[pos][0]
+            y = locatable[pos][1]
             action_space[y][x] = TileType.DISTORTEDTILE.value
 
         self.action_space = action_space
@@ -427,8 +259,9 @@ class Env(tk.Tk):
 
                 # 재생성
                 if cnt == 0:
-                    tmppos = self.brokenTile[np.random.randint(len(self.brokenTile))]
-                    self.action_space[tmppos[0]][tmppos[1]] = TileType.BASICTILE.value
+                    if len(self.brokenTile) != 0:
+                        tmppos = self.brokenTile[np.random.randint(len(self.brokenTile))]
+                        self.action_space[tmppos[0]][tmppos[1]] = TileType.BASICTILE.value
 
                 # !재생성
                 else:
@@ -464,17 +297,6 @@ class Env(tk.Tk):
         self.Draw()
         self.render()
 
-        # if self.map.maxPlayTime - self.playTime >= 0:
-        #     if len(self.breakableTiles) == 0:
-        #         reward = 3
-        #     else:
-        #         reward = 0.1
-        # else:
-        #     if len(self.breakableTiles) == 0:
-        #         reward = 0
-        #     else:
-        #         reward = -1
-
         if hand == 2:
             reward = 0
         elif self.map.maxPlayTime - self.playTime >= 0:
@@ -501,6 +323,8 @@ class Env(tk.Tk):
                     self.brokenTile.append([y, x])
                 elif tile == TileType.DISTORTEDTILE.value:
                     self.distortTiles.append([y, x])
+                elif tile == -1:
+                    pass
                 else:
                     if tile != TileType.BASICTILE.value:
                         self.specialTile = [y, x]

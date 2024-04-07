@@ -70,14 +70,16 @@ class A2CAgent:
         mapInfo.extend(state['mapInfo'])
         reRollCnt = state['reRoll'][0]
 
-        lst = [policy[i] if mapInfo[i][2] != TileType.BROKENTILE.value and mapInfo[i][2] != TileType.DISTORTEDTILE.value else 0
+        lst = [policy[i] if mapInfo[i][2] != TileType.BROKENTILE.value and mapInfo[i][2] != TileType.DISTORTEDTILE.value
+               and mapInfo[i][2] != -1 else 0
                for i in range(len(policy)-1)]
         lst.append(policy[len(policy)-1] if reRollCnt > 0 else 0)
 
         if np.sum(lst) != 0:
             lst = [i / np.sum(lst) for i in lst]
         else:
-            lst = [1 if mapInfo[i][2] != TileType.BROKENTILE.value and mapInfo[i][2] != TileType.DISTORTEDTILE.value else 0
+            lst = [1 if mapInfo[i][2] != TileType.BROKENTILE.value and mapInfo[i][2] != TileType.DISTORTEDTILE.value
+                    and mapInfo[i][2] != -1 else 0
                    for i in range(len(lst)-1)]
             lst.append(1 if reRollCnt > 0 else 0)
             lst = [i / np.sum(lst) for i in lst]
@@ -133,8 +135,8 @@ if __name__ == "__main__":
     # 액터-크리틱(A2C) 에이전트 생성
     agent = A2CAgent(action_size)
 
-    tmp1, tmp2 = 0, 0
-    tmp3, tmp4 = [], []
+    tmpLosses, tmpPlayTimes = [], []
+    LossGraph, playtimeGraph = [], []
     scores, episodes, playTimes = [], [], []
     score_avg = 0
 
@@ -179,8 +181,8 @@ if __name__ == "__main__":
                 episodes.append(e)
                 playTimes.append(env.playTime)
 
-                tmp1 += np.mean(loss_list)
-                tmp2 += env.playTime
+                tmpLosses.append(np.mean(loss_list))
+                tmpPlayTimes.append(env.playTime)
 
                 # fig, ax1 = plt.subplots()
                 # ax1.plot(episodes, playTimes, 'r')
@@ -193,26 +195,26 @@ if __name__ == "__main__":
 
         # 100 에피소드마다 모델 저장
         if e % 10 == 9:
-            tmp3.append(tmp2 / 10)
-            tmp4.append(tmp1 / 10)
-            tmp1, tmp2 = 0, 0
+            LossGraph.append(np.mean(tmpLosses))
+            playtimeGraph.append(np.mean(tmpPlayTimes))
+            tmpLosses, tmpPlayTimes = [], []
 
             fig, ax1 = plt.subplots()
-            ax1.plot(tmp3, 'r')
+            ax1.plot(playtimeGraph, 'r')
             ax1.set_ylabel('PlayTime', color='red')
             ax2 = ax1.twinx()
-            ax2.plot(tmp4, 'b')
+            ax2.plot(LossGraph, 'b')
             ax2.set_ylabel('Loss', color='blue')
             plt.savefig("./save_graph/graph.png")
             plt.close()
 
-            plt.plot(tmp3, 'r')
+            plt.plot(playtimeGraph, 'r')
             plt.xlabel("episode")
             plt.ylabel("PlayTime")
             plt.savefig("./save_graph/graph_PlayTime.png")
             plt.close()
 
-            plt.plot(tmp4, 'b')
+            plt.plot(LossGraph, 'b')
             plt.xlabel("episode")
             plt.ylabel("Loss")
             plt.savefig("./save_graph/graph_Loss.png")
