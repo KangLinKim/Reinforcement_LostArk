@@ -1,6 +1,7 @@
 from imports import *
 from Options import *
 
+
 class Card:
     def __init__(self, card, cardLevel=1):
         super(Card, self).__init__()

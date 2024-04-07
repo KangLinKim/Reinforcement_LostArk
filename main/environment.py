@@ -7,7 +7,7 @@ options = Options()
 class Env(tk.Tk):
     def __init__(self, render_speed=0.01):
         super(Env, self).__init__()
-        self.mapIdx = 0
+        self.mapIdx = MapType.HEADPIECE_2.value
         self.map = Map(self.mapIdx)
         self.specialTile = []
         self.render_speed = render_speed
@@ -104,7 +104,7 @@ class Env(tk.Tk):
                 cnt = 3 if len(self.brokenTile) >= 3 else len(self.brokenTile)
                 positionIdx = np.random.choice(range(0, len(self.brokenTile)), cnt, replace=False)
                 for idx in positionIdx:
-                    tmppos = self.breakableTiles[idx]
+                    tmppos = self.brokenTile[idx]
                     self.action_space[tmppos[0]][tmppos[1]] = TileType.BASICTILE.value
 
         elif tile == TileType.ADDITIONTILE.value:
@@ -299,16 +299,10 @@ class Env(tk.Tk):
 
         if hand == 2:
             reward = 0
-        elif self.map.maxPlayTime - self.playTime >= 0:
-            if len(self.breakableTiles) == 0:
-                reward = 1
-            else:
-                reward = -0.1
+        elif len(self.breakableTiles) == 0 and self.map.maxPlayTime - self.playTime >= 0:
+            reward = 1
         else:
-            if len(self.breakableTiles) == 0:
-                reward = 0
-            else:
-                reward = -1
+            reward = -0.1
 
         return self.GetState(), reward, len(self.breakableTiles) == 0
 

@@ -28,29 +28,3 @@ class Options:
         p[CardType.TSUNAMI.value] = 0.055
         return p
 
-class CardType(Enum):
-    THUNDERSTROKE = 0   # 낙뢰
-    EXPLOSION = 1       # 대폭발
-    THUNDERBOLT = 2     # 벼락
-    FIREWORKS = 3       # 업화
-    WATERSPOUT = 4      # 용오름
-    PURIFICATION = 5    # 정화
-    EARTHQUAKE = 6      # 지진
-    SHOKEWAVE = 7       # 충격파
-    STORM = 8           # 폭풍우
-    TSUNAMI = 9         # 해일
-    # 특수카드
-    WORLDTREE = 10      # 세계수의 공명
-    ERUPTION = 11       # 분출
-
-
-class TileType(Enum):
-    BASICTILE = 0       # 기본 타일
-    BROKENTILE = 1      # 부숴진 타일
-    DISTORTEDTILE = 2   # 왜곡된 타일
-    ADDITIONTILE = 3    # 추가
-    BLESSINGTILE = 4    # 축복
-    RESONANCETILE = 5   # 신비
-    REINFORCETILE = 6   # 강화
-    DUPLICATIONTILE = 7 # 복제
-    RELOCATIONTILE = 8  # 재배치

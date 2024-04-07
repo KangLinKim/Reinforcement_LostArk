@@ -184,15 +184,6 @@ if __name__ == "__main__":
                 tmpLosses.append(np.mean(loss_list))
                 tmpPlayTimes.append(env.playTime)
 
-                # fig, ax1 = plt.subplots()
-                # ax1.plot(episodes, playTimes, 'r')
-                # ax1.set_ylabel('playTime', color='red')
-                # ax2 = ax1.twinx()
-                # ax2.plot(episodes, scores, 'b')
-                # ax2.set_ylabel('score', color='blue')
-                # plt.savefig("./save_graph/graph.png")
-                # plt.close()
-
         # 100 에피소드마다 모델 저장
         if e % 10 == 9:
             LossGraph.append(np.mean(tmpLosses))
