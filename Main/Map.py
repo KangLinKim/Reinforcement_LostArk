@@ -1,4 +1,4 @@
-from imports import *
+from Imports import *
 
 UNIT = 50  # 픽셀 수
 

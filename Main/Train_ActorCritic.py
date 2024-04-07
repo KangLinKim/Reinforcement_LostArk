@@ -7,7 +7,7 @@ import sys
 import gym
 import pylab
 import numpy as np
-from environment import Env
+from Environment import Env
 import matplotlib.pyplot as plt
 import tensorflow as tf
 from tensorflow.keras.layers import Dense
@@ -196,20 +196,20 @@ if __name__ == "__main__":
             ax2 = ax1.twinx()
             ax2.plot(LossGraph, 'b')
             ax2.set_ylabel('Loss', color='blue')
-            plt.savefig("./save_graph/graph.png")
+            plt.savefig("./Save_graph/Graph.png")
             plt.close()
 
             plt.plot(playtimeGraph, 'r')
             plt.xlabel("episode")
             plt.ylabel("PlayTime")
-            plt.savefig("./save_graph/graph_PlayTime.png")
+            plt.savefig("./Save_graph/Graph_PlayTime.png")
             plt.close()
 
             plt.plot(LossGraph, 'b')
             plt.xlabel("episode")
             plt.ylabel("Loss")
-            plt.savefig("./save_graph/graph_Loss.png")
+            plt.savefig("./Save_graph/Graph_Loss.png")
             plt.close()
 
         if e % 100 == 0:
-            agent.model.save_weights('save_model/model', save_format='tf')
+            agent.model.save_weights('Save_model/Model', save_format='tf')

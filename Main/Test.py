@@ -2,7 +2,7 @@ import copy
 import pylab
 import random
 import numpy as np
-from environment import Env
+from Environment import Env
 import tensorflow as tf
 from tensorflow.keras.layers import Dense
 from tensorflow.keras.optimizers import Adam
@@ -31,7 +31,7 @@ class REINFORCEAgent:
         self.action_size = action_size
 
         self.model = REINFORCE(self.action_size)
-        self.model.load_weights('save_model/trained/model')
+        self.model.load_weights('Save_model/trained/model')
 
     # 정책신경망으로 행동 선택
     def get_action(self, state):

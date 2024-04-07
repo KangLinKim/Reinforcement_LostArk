@@ -1,4 +1,4 @@
-from imports import *
+from Imports import *
 
 PhotoImage = ImageTk.PhotoImage
 

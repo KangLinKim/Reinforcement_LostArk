@@ -9,7 +9,7 @@ import copy
 import matplotlib.pyplot as plt
 import random
 import numpy as np
-from environment import Env
+from Environment import Env
 import tensorflow as tf
 from tensorflow.keras.layers import Dense
 from tensorflow.keras.optimizers import Adam
@@ -193,9 +193,9 @@ if __name__ == "__main__":
                 ax2 = ax1.twinx()
                 ax2.plot(episodes, scores, 'b')
                 ax2.set_ylabel('score', color='blue')
-                plt.savefig("./save_graph/graph.png")
+                plt.savefig("./Save_graph/Graph.png")
                 plt.close()
 
         # 100 에피소드마다 모델 저장
         if e % 100 == 0:
-            agent.model.save_weights('save_model/model', save_format='tf')
+            agent.model.save_weights('Save_model/model', save_format='tf')

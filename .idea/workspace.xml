@@ -4,19 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5b52e8d7-0ddb-4a69-856d-2c39f72d8b69" name="Changes" comment="version 4.0">
+    <list default="true" id="5b52e8d7-0ddb-4a69-856d-2c39f72d8b69" name="Changes" comment="version 5.0">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/Card.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/Card.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/Map.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/Map.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/Options.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/Options.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/environment.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/environment.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/imports.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/imports.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/save_graph/graph.png" beforeDir="false" afterPath="$PROJECT_DIR$/main/save_graph/graph.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/save_graph/graph_Loss.png" beforeDir="false" afterPath="$PROJECT_DIR$/main/save_graph/graph_Loss.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/save_graph/graph_PlayTime.png" beforeDir="false" afterPath="$PROJECT_DIR$/main/save_graph/graph_PlayTime.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/save_model/model.data-00000-of-00001" beforeDir="false" afterPath="$PROJECT_DIR$/main/save_model/model.data-00000-of-00001" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/save_model/model.index" beforeDir="false" afterPath="$PROJECT_DIR$/main/save_model/model.index" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/train_ActorCritic.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/train_ActorCritic.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/Card.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/Card.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/Map.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/Map.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/Options.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/Options.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/environment.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/Environment.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/imports.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/Imports.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/save_graph/graph.png" beforeDir="false" afterPath="$PROJECT_DIR$/Main/Save_graph/Graph.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/save_graph/graph_Loss.png" beforeDir="false" afterPath="$PROJECT_DIR$/Main/Save_graph/Graph_Loss.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/save_graph/graph_PlayTime.png" beforeDir="false" afterPath="$PROJECT_DIR$/Main/Save_graph/Graph_PlayTime.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/save_model/checkpoint" beforeDir="false" afterPath="$PROJECT_DIR$/Main/Save_model/checkpoint" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/save_model/model.data-00000-of-00001" beforeDir="false" afterPath="$PROJECT_DIR$/Main/Save_model/model.data-00000-of-00001" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/save_model/model.index" beforeDir="false" afterPath="$PROJECT_DIR$/Main/Save_model/Model.index" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/save_model/trained/checkpoint" beforeDir="false" afterPath="$PROJECT_DIR$/Main/Save_model/trained/checkpoint" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/save_model/trained/model.data-00000-of-00001" beforeDir="false" afterPath="$PROJECT_DIR$/Main/Save_model/trained/model.data-00000-of-00001" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/save_model/trained/model.index" beforeDir="false" afterPath="$PROJECT_DIR$/Main/Save_model/trained/model.index" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/Test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/Train_Reinforce.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/train_ActorCritic.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/Train_ActorCritic.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +39,20 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;KangLinKim&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="5a40fd7e-69a7-477d-915d-99676bea3c18" />
+        <option name="url" value="https://github.com/KangLinKim/Reinforcement_LostArk.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
 }</component>
@@ -46,6 +66,7 @@
   "keyToString": {
     "Python.Map.executor": "Run",
     "Python.environment.executor": "Run",
+    "Python.test.executor": "Run",
     "Python.train_ActorCritic (1).executor": "Run",
     "Python.train_ActorCritic.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
@@ -61,7 +82,29 @@
       <recent name="C:\Practice\Reinforcement_LostArk\main" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.train_ActorCritic (1)">
+  <component name="RunManager" selected="Python.Train_ActorCritic (1)">
+    <configuration name="Environment" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Reinforcement_LostArk" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/main" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="C:\Practice\Reinforcement_LostArk\main\Environment.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="Map" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Reinforcement_LostArk" />
       <option name="ENV_FILES" value="" />
@@ -84,7 +127,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="environment" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="Test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Reinforcement_LostArk" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -97,7 +140,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main/environment.py" />
+      <option name="SCRIPT_NAME" value="C:\Practice\Reinforcement_LostArk\main\Test.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -106,7 +149,29 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="train_ActorCritic (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="Train_ActorCritic (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Reinforcement_LostArk" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Main" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Main/Train_ActorCritic.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Train_ActorCritic" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Reinforcement_LostArk" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -119,29 +184,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main/train_ActorCritic.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="train_ActorCritic" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Reinforcement_LostArk" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/train_ActorCritic.py" />
+      <option name="SCRIPT_NAME" value="C:\Practice\Reinforcement_LostArk\main\Train_ActorCritic.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -152,10 +195,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.train_ActorCritic (1)" />
+        <item itemvalue="Python.Train_ActorCritic (1)" />
+        <item itemvalue="Python.Test" />
+        <item itemvalue="Python.Train_ActorCritic" />
         <item itemvalue="Python.Map" />
-        <item itemvalue="Python.environment" />
-        <item itemvalue="Python.train_ActorCritic" />
+        <item itemvalue="Python.Environment" />
       </list>
     </recent_temporary>
   </component>
@@ -183,7 +227,23 @@
       <option name="project" value="LOCAL" />
       <updated>1712503269574</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="version 4.1">
+      <option name="closed" value="true" />
+      <created>1712512115772</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1712512115772</updated>
+    </task>
+    <task id="LOCAL-00003" summary="version 5.0">
+      <option name="closed" value="true" />
+      <created>1712512145790</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1712512145790</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -199,6 +259,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="version 4.0" />
-    <option name="LAST_COMMIT_MESSAGE" value="version 4.0" />
+    <MESSAGE value="version 4.1" />
+    <MESSAGE value="version 5.0" />
+    <option name="LAST_COMMIT_MESSAGE" value="version 5.0" />
   </component>
 </project>
