@@ -4,8 +4,9 @@ UNIT = 50  # 픽셀 수
 
 
 class Map:
-    def __init__(self, mapIdx=-1):
-        self.plate = self.GetPlate(mapIdx)
+    def __init__(self, _mapIdx=-1):
+        self.plate = self.GetPlate(_mapIdx)
+        self.mapType = _mapIdx
 
         self.HEIGHT = len(self.plate)  # 그리드 세로
         self.WIDTH = len(self.plate)  # 그리드 가로
@@ -15,6 +16,7 @@ class Map:
     def GetPlate(self, mapIdx):
         if mapIdx == -1:
             mapIdx = np.random.randint(0, len(MapType))
+            self.mapType = mapIdx
         if mapIdx == MapType.HEADPIECE_1.value:
             return [
                 [-1, -1, -1, -1, -1, -1, -1, -1],

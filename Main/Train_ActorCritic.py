@@ -11,6 +11,7 @@ from Environment import Env
 import matplotlib.pyplot as plt
 import tensorflow as tf
 from tensorflow.keras.layers import Dense
+from tensorflow.keras.layers import Dropout
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.initializers import RandomUniform
 from Options import *
@@ -19,9 +20,13 @@ from Options import *
 class A2C(tf.keras.Model):
     def __init__(self, action_size):
         super(A2C, self).__init__()
-        self.policy_fc1 = Dense(128, activation='leaky_relu')
+        self.policy_fc1 = Dense(128, activation='tanh')
+        self.drop1 = Dropout(0.2)
         self.policy_fc2 = Dense(256, activation='leaky_relu')
-        self.policy_fc3 = Dense(128, activation='leaky_relu')
+        self.drop2 = Dropout(0.2)
+        self.policy_fc3 = Dense(256, activation='leaky_relu')
+        self.drop3 = Dropout(0.2)
+        self.policy_fc4 = Dense(128, activation='leaky_relu')
         self.actor_out = Dense(action_size, activation='softmax',
                                kernel_initializer=RandomUniform(-1e-3, 1e-3))
 
@@ -31,8 +36,12 @@ class A2C(tf.keras.Model):
 
     def call(self, x):
         actor_x = self.policy_fc1(x)
+        actor_x = self.drop1(actor_x)
         actor_x = self.policy_fc2(actor_x)
+        actor_x = self.drop2(actor_x)
         actor_x = self.policy_fc3(actor_x)
+        actor_x = self.drop3(actor_x)
+        actor_x = self.policy_fc4(actor_x)
         policy = self.actor_out(actor_x)
 
         critic_x = self.critic_fc1(x)
@@ -70,16 +79,16 @@ class A2CAgent:
         mapInfo.extend(state['mapInfo'])
         reRollCnt = state['reRoll'][0]
 
-        lst = [policy[i] if mapInfo[i][2] != TileType.BROKENTILE.value and mapInfo[i][2] != TileType.DISTORTEDTILE.value
-               and mapInfo[i][2] != -1 else 0
+        # lst = [policy[i] if mapInfo[i][2] != TileType.BROKENTILE.value and mapInfo[i][2] != TileType.DISTORTEDTILE.value
+        #        and mapInfo[i][2] != -1 else 0
+        lst = [policy[i] if mapInfo[i][2] not in [TileType.BROKENTILE.value, TileType.DISTORTEDTILE.value, -1] else 0
                for i in range(len(policy)-1)]
         lst.append(policy[len(policy)-1] if reRollCnt > 0 else 0)
 
         if np.sum(lst) != 0:
             lst = [i / np.sum(lst) for i in lst]
         else:
-            lst = [1 if mapInfo[i][2] != TileType.BROKENTILE.value and mapInfo[i][2] != TileType.DISTORTEDTILE.value
-                    and mapInfo[i][2] != -1 else 0
+            lst = [1 if mapInfo[i][2] not in [TileType.BROKENTILE.value, TileType.DISTORTEDTILE.value, -1] else 0
                    for i in range(len(lst)-1)]
             lst.append(1 if reRollCnt > 0 else 0)
             lst = [i / np.sum(lst) for i in lst]

@@ -4,10 +4,12 @@ from Card import *
 
 options = Options()
 
+global tmpSpecialTile
+
 class Env(tk.Tk):
-    def __init__(self, render_speed=0.01):
+    def __init__(self, render_speed=0.01, _mapIdx=-1):
         super(Env, self).__init__()
-        self.mapIdx = MapType.HEADPIECE_2.value
+        self.mapIdx = _mapIdx
         self.map = Map(self.mapIdx)
         self.specialTile = []
         self.render_speed = render_speed
@@ -104,8 +106,9 @@ class Env(tk.Tk):
                 cnt = 3 if len(self.brokenTile) >= 3 else len(self.brokenTile)
                 positionIdx = np.random.choice(range(0, len(self.brokenTile)), cnt, replace=False)
                 for idx in positionIdx:
-                    tmppos = self.brokenTile[idx]
-                    self.action_space[tmppos[0]][tmppos[1]] = TileType.BASICTILE.value
+                    tmpPos = self.brokenTile[idx]
+                    self.action_space[tmpPos[0]][tmpPos[1]] = TileType.BASICTILE.value
+                    # print(f'{tmpPos[0]}, {tmpPos[1]} restored by DISTORTEDTILE')
 
         elif tile == TileType.ADDITIONTILE.value:
             self.action_space[posY][posX] = TileType.BROKENTILE.value
@@ -235,6 +238,7 @@ class Env(tk.Tk):
         card = self.leftHand if hand == 0 else self.rightHand
         relocation = False
 
+
         if hand == 0:
             self.leftHand = self.waitLine[0]
         elif hand == 1:
@@ -260,16 +264,17 @@ class Env(tk.Tk):
                 # 재생성
                 if cnt == 0:
                     if len(self.brokenTile) != 0:
-                        tmppos = self.brokenTile[np.random.randint(len(self.brokenTile))]
-                        self.action_space[tmppos[0]][tmppos[1]] = TileType.BASICTILE.value
+                        tmpPos = self.brokenTile[np.random.randint(len(self.brokenTile))]
+                        self.action_space[tmpPos[0]][tmpPos[1]] = TileType.BASICTILE.value
+                        # print(f'{tmpPos[0]}, {tmpPos[1]} restored by THUNDERBOLT')
 
                 # !재생성
                 else:
                     cnt = min(cnt - 1, len(self.breakableTiles))
                     positionIdx = np.random.choice(range(0, len(self.breakableTiles)), cnt, replace=False)
                     for idx in positionIdx:
-                        tmppos = self.breakableTiles[idx]
-                        relocation = self.TileBreak(hand, card, tmppos[1], tmppos[0])
+                        tmpPos = self.breakableTiles[idx]
+                        relocation = self.TileBreak(hand, card, tmpPos[1], tmpPos[0])
 
             # 벼락 외 카드 이펙트 구현
             else:
@@ -310,9 +315,9 @@ class Env(tk.Tk):
         self.breakableTiles = []
         self.brokenTile = []
         self.distortTiles = []
-        for y in range(0, len(self.action_space)):
-            for x in range(0, len(self.action_space)):
-                tile = self.action_space[int(y)][int(x)]
+        for y in range(0, self.map.HEIGHT):
+            for x in range(0, self.map.WIDTH):
+                tile = self.action_space[y][x]
                 if tile == TileType.BROKENTILE.value:
                     self.brokenTile.append([y, x])
                 elif tile == TileType.DISTORTEDTILE.value:
@@ -327,6 +332,7 @@ class Env(tk.Tk):
     def ResetActionSpace(self):
         self.map = Map(self.mapIdx)
         self.action_space = self.map.plate
+        self.specialTile = []
 
     def reset(self):
         self.update()
