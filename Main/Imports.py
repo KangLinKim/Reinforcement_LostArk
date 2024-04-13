@@ -35,49 +35,51 @@ class TileType(Enum):
 
 class MapType(Enum):
     HEADPIECE_1 = 0
-    HEADPIECE_2 = 1
-    HEADPIECE_3 = 2
-    HEADPIECE_4 = 3
-    HEADPIECE_5 = 4
-    HEADPIECE_6 = 5
-    HEADPIECE_7 = 6
+    CHESTPIECE_1 = 1
+    PANTS_1 = 2
+    GLOVES_1 = 3
+    SHOULDERPIECE_1 = 4
+    # WEAPON_1 = 5
 
-    CHESTPIECE_1 = 7
-    CHESTPIECE_2 = 8
-    CHESTPIECE_3 = 9
-    CHESTPIECE_4 = 10
-    CHESTPIECE_5 = 11
-    CHESTPIECE_6 = 12
-    CHESTPIECE_7 = 13
+    HEADPIECE_2 = 5
+    CHESTPIECE_2 = 6
+    PANTS_2 = 7
+    GLOVES_2 = 8
+    SHOULDERPIECE_2 = 9
+    # WEAPON_2 = 11
 
-    PANTS_1 = 14
-    PANTS_2 = 15
-    PANTS_3 = 16
+    HEADPIECE_3 = 10
+    CHESTPIECE_3 = 11
+    PANTS_3 = 12
+    GLOVES_3 = 13
+    SHOULDERPIECE_3 = 14
+    # WEAPON_3 = 17
+
+    HEADPIECE_4 = 15
+    CHESTPIECE_4 = 16
     PANTS_4 = 17
-    PANTS_5 = 18
-    PANTS_6 = 19
-    PANTS_7 = 20
+    GLOVES_4 = 18
+    SHOULDERPIECE_4 = 19
+    # WEAPON_4 = 23
 
-    GLOVES_1 = 21
-    GLOVES_2 = 22
-    GLOVES_3 = 23
-    GLOVES_4 = 24
-    GLOVES_5 = 25
-    GLOVES_6 = 26
-    GLOVES_7 = 27
+    HEADPIECE_5 = 20
+    CHESTPIECE_5 = 21
+    PANTS_5 = 22
+    GLOVES_5 = 23
+    SHOULDERPIECE_5 = 24
 
-    SHOULDERPIECE_1 = 28
-    SHOULDERPIECE_2 = 29
-    SHOULDERPIECE_3 = 30
-    SHOULDERPIECE_4 = 31
-    SHOULDERPIECE_5 = 32
-    SHOULDERPIECE_6 = 33
+    HEADPIECE_6 = 25
+    CHESTPIECE_6 = 26
+    PANTS_6 = 27
+    GLOVES_6 = 28
+    SHOULDERPIECE_6 = 29
+
+    HEADPIECE_7 = 30
+    CHESTPIECE_7 = 31
+    PANTS_7 = 32
+    GLOVES_7 = 33
     SHOULDERPIECE_7 = 34
 
-    WEAPON_1 = 35
-    WEAPON_2 = 36
-    WEAPON_3 = 37
-    WEAPON_4 = 38
     # WEAPON_5 = 39
     # Weapon_6 = 40
     # Weapon_7 = 41

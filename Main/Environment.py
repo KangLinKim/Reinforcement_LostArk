@@ -233,11 +233,24 @@ class Env(tk.Tk):
 
         self.CardLevelUP()
 
-    def Action(self, hand, pos):
+    def Action(self, action):
+        mapSize = len(sum(self.action_space, []))
+        if action >= mapSize * 2:
+            # 리롤
+            hand = 2
+            pos = 0
+        elif action >= mapSize:
+            # 오른손 선택
+            hand = 1
+            pos = action - mapSize
+        else:
+            # 왼손
+            hand = 0
+            pos = action
+
         pos = [int(pos % self.map.WIDTH), int(pos / self.map.WIDTH)]
         card = self.leftHand if hand == 0 else self.rightHand
         relocation = False
-
 
         if hand == 0:
             self.leftHand = self.waitLine[0]
@@ -304,7 +317,7 @@ class Env(tk.Tk):
 
         if hand == 2:
             reward = 0
-        elif len(self.breakableTiles) == 0 and self.map.maxPlayTime - self.playTime >= 0:
+        elif len(self.breakableTiles) == 0 and self.map.maxPlayTime - self.playTime + 3 >= 0:
             reward = 1
         else:
             reward = -0.1
@@ -336,7 +349,6 @@ class Env(tk.Tk):
 
     def reset(self):
         self.update()
-        # self.render(0.05)
 
         self.playTime = 0
 
@@ -393,7 +405,7 @@ class Env(tk.Tk):
                                 toX = x + effect['dx'][i]
                                 toY = y + effect['dy'][i]
                                 if self.map.WIDTH > toX >= 0 and self.map.HEIGHT > toY >= 0:
-                                    if space[toY][toX] == TileType.BROKENTILE.value:
+                                    if space[toY][toX] in [TileType.BROKENTILE.value, -1]:
                                         pass
                                     elif space[toY][toX] == TileType.DISTORTEDTILE.value:
                                         reward -= 3 * (effect['percents'][i] / 100)
@@ -401,7 +413,7 @@ class Env(tk.Tk):
                                         reward += effect['percents'][i] / 100
 
                     tmp.append(reward)
-                tmp.append(space[y][x])
+                tmp.append(space[y][x] if space[y][x] not in [TileType.BROKENTILE.value, TileType.DISTORTEDTILE.value, -1] else -1)
                 ret.append(tmp)
         return ret
 

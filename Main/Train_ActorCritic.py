@@ -79,8 +79,6 @@ class A2CAgent:
         mapInfo.extend(state['mapInfo'])
         reRollCnt = state['reRoll'][0]
 
-        # lst = [policy[i] if mapInfo[i][2] != TileType.BROKENTILE.value and mapInfo[i][2] != TileType.DISTORTEDTILE.value
-        #        and mapInfo[i][2] != -1 else 0
         lst = [policy[i] if mapInfo[i][2] not in [TileType.BROKENTILE.value, TileType.DISTORTEDTILE.value, -1] else 0
                for i in range(len(policy)-1)]
         lst.append(policy[len(policy)-1] if reRollCnt > 0 else 0)
@@ -134,8 +132,11 @@ class A2CAgent:
         return np.array(loss)
 
 
+keepLearning = False
+
 if __name__ == "__main__":
     env = Env(render_speed = 0.001)
+    env.mapIdx = 0
 
     state_size = env.state_size
     action_size = env.action_size
@@ -143,42 +144,36 @@ if __name__ == "__main__":
 
     # 액터-크리틱(A2C) 에이전트 생성
     agent = A2CAgent(action_size)
+    if keepLearning:
+        agent.model.load_weights('Save_model/Model')
 
     tmpLosses, tmpPlayTimes = [], []
     LossGraph, playtimeGraph = [], []
     scores, episodes, playTimes = [], [], []
     score_avg = 0
+    ran = 5
 
     EPISODES = 100000
+    STAGEUPDATER = int(EPISODES / 10)
+    SAVEMODEL = 100
+    SAVEGRAPH = 10
+
     for e in range(EPISODES):
         done = False
         score = 0
         loss_list = []
+
         state = env.reset()
 
         while not done:
             action = agent.get_action(state)
 
-            if action >= mapSize*2:
-                # 리롤
-                handAction = 2
-                mapAction = 0
-            elif action >= mapSize:
-                # 오른손 선택
-                handAction = 1
-                mapAction = action - mapSize
-            else:
-                # 왼손
-                handAction = 0
-                mapAction = action
-
-            nextState, reward, done = env.Action(handAction, mapAction)
+            nextState, reward, done = env.Action(action)
 
             loss = agent.train_model(action, reward, nextState, done)
             loss_list.append(loss)
 
             score += reward
-
             state = nextState
 
             if done:
@@ -188,13 +183,15 @@ if __name__ == "__main__":
 
                 scores.append(np.mean(loss_list))
                 episodes.append(e)
-                playTimes.append(env.playTime)
+                playTimes.append(env.map.maxPlayTime - env.playTime)
 
                 tmpLosses.append(np.mean(loss_list))
                 tmpPlayTimes.append(env.playTime)
 
+                env.mapIdx = np.random.choice(range(0, ran), 1)[0]
+
         # 100 에피소드마다 모델 저장
-        if e % 10 == 9:
+        if e % SAVEGRAPH == SAVEGRAPH-1:
             LossGraph.append(np.mean(tmpLosses))
             playtimeGraph.append(np.mean(tmpPlayTimes))
             tmpLosses, tmpPlayTimes = [], []
@@ -220,5 +217,9 @@ if __name__ == "__main__":
             plt.savefig("./Save_graph/Graph_Loss.png")
             plt.close()
 
-        if e % 100 == 0:
+        if e % SAVEMODEL == SAVEMODEL-1:
             agent.model.save_weights('Save_model/Model', save_format='tf')
+
+        if e % STAGEUPDATER == STAGEUPDATER-1:
+            if ran < len(list(MapType)):
+                ran += 5
