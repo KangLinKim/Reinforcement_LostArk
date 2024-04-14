@@ -312,15 +312,24 @@ class Env(tk.Tk):
             self.MapInfoUpdate()
             self.SettupSpecialTile()
 
+        self.MapInfoUpdate()
         self.Draw()
         self.render()
 
+        reward = 0
         if hand == 2:
             reward = 0
-        elif len(self.breakableTiles) == 0 and self.map.maxPlayTime - self.playTime + 3 >= 0:
-            reward = 1
-        else:
-            reward = -0.1
+        elif len(self.breakableTiles) == 0:
+            if self.map.maxPlayTime - self.playTime >= 0:
+                reward = 3
+            elif self.map.maxPlayTime - self.playTime >= -1:
+                reward = 2
+            elif self.map.maxPlayTime - self.playTime >= -3:
+                reward = 1
+            else:
+                reward = 0
+        elif self.map.maxPlayTime - self.playTime <= -3:
+            reward = -0.3
 
         return self.GetState(), reward, len(self.breakableTiles) == 0
 
@@ -389,6 +398,7 @@ class Env(tk.Tk):
         for y in range(len(space)):
             for x in range(len(space[0])):
                 tmp = []
+                tmp.append(space[y][x] if space[y][x] not in [TileType.BROKENTILE.value, TileType.DISTORTEDTILE.value, -1] else -1)
                 for card in cards:
                     effect = card.effect
                     reward = 0
@@ -413,7 +423,6 @@ class Env(tk.Tk):
                                         reward += effect['percents'][i] / 100
 
                     tmp.append(reward)
-                tmp.append(space[y][x] if space[y][x] not in [TileType.BROKENTILE.value, TileType.DISTORTEDTILE.value, -1] else -1)
                 ret.append(tmp)
         return ret
 

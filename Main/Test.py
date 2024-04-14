@@ -159,8 +159,8 @@ if __name__ == "__main__":
             fig = plt.figure()
             ax = fig.add_subplot()
             ax.plot(scoreList, label='Playtime', color='#80B3FF')
-            ax.set_xlabel('episode', color='blue')
-            ax.set_ylabel('PlayTime', color='blue')
+            ax.set_xlabel('episode')
+            ax.set_ylabel('PlayTime')
 
             ax.axhline(env.map.maxPlayTime, label='3 star', color='g')
             ax.axhline(env.map.maxPlayTime + 1, label='2 star', color='b')

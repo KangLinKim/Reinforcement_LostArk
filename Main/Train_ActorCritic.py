@@ -79,14 +79,14 @@ class A2CAgent:
         mapInfo.extend(state['mapInfo'])
         reRollCnt = state['reRoll'][0]
 
-        lst = [policy[i] if mapInfo[i][2] not in [TileType.BROKENTILE.value, TileType.DISTORTEDTILE.value, -1] else 0
+        lst = [policy[i] if mapInfo[i][0] not in [TileType.BROKENTILE.value, TileType.DISTORTEDTILE.value, -1] else 0
                for i in range(len(policy)-1)]
         lst.append(policy[len(policy)-1] if reRollCnt > 0 else 0)
 
         if np.sum(lst) != 0:
             lst = [i / np.sum(lst) for i in lst]
         else:
-            lst = [1 if mapInfo[i][2] not in [TileType.BROKENTILE.value, TileType.DISTORTEDTILE.value, -1] else 0
+            lst = [1 if mapInfo[i][0] not in [TileType.BROKENTILE.value, TileType.DISTORTEDTILE.value, -1] else 0
                    for i in range(len(lst)-1)]
             lst.append(1 if reRollCnt > 0 else 0)
             lst = [i / np.sum(lst) for i in lst]
@@ -124,6 +124,7 @@ class A2CAgent:
             critic_loss = tf.reduce_mean(critic_loss)
 
             # 하나의 오류 함수로 만들기
+            # tf.Tensor(-0.15758774, shape=(), dtype=float32)
             loss = 0.2 * actor_loss + critic_loss
 
         # 오류함수를 줄이는 방향으로 모델 업데이트
@@ -167,7 +168,6 @@ if __name__ == "__main__":
 
         while not done:
             action = agent.get_action(state)
-
             nextState, reward, done = env.Action(action)
 
             loss = agent.train_model(action, reward, nextState, done)
