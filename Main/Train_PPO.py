@@ -23,18 +23,21 @@ import torch.nn.functional as F
 class A2C(tf.keras.Model):
     def __init__(self, action_size):
         super(A2C, self).__init__()
-        self.policy_fc1 = Dense(128, activation='tanh')
+        self.policy_fc1 = Dense(256, activation='leaky_relu')
         self.drop1 = Dropout(0.2)
-        self.policy_fc2 = Dense(256, activation='leaky_relu')
+        self.policy_fc2 = Dense(512, activation='leaky_relu')
         self.drop2 = Dropout(0.2)
-        self.policy_fc3 = Dense(256, activation='leaky_relu')
+        self.policy_fc3 = Dense(512, activation='leaky_relu')
         self.drop3 = Dropout(0.2)
-        self.policy_fc4 = Dense(128, activation='leaky_relu')
+        self.policy_fc4 = Dense(256, activation='leaky_relu')
+        self.drop4 = Dropout(0.2)
+        self.policy_fc5 = Dense(128, activation='leaky_relu')
         self.actor_out = Dense(action_size, activation='softmax',
                                kernel_initializer=RandomUniform(-1e-3, 1e-3))
 
-        self.critic_fc1 = Dense(128, activation='selu')
-        self.critic_fc2 = Dense(64, activation='leaky_relu')
+        self.critic_fc1 = Dense(256, activation='leaky_relu')
+        self.critic_fc2 = Dense(128, activation='leaky_relu')
+        self.critic_fc3 = Dense(64, activation='leaky_relu')
         self.critic_out = Dense(1, kernel_initializer =RandomUniform(-1e-3, 1e-3))
 
     def call(self, x):
@@ -45,10 +48,13 @@ class A2C(tf.keras.Model):
         actor_x = self.policy_fc3(actor_x)
         actor_x = self.drop3(actor_x)
         actor_x = self.policy_fc4(actor_x)
+        actor_x = self.drop4(actor_x)
+        actor_x = self.policy_fc5(actor_x)
         policy = self.actor_out(actor_x)
 
         critic_x = self.critic_fc1(x)
         critic_x = self.critic_fc2(critic_x)
+        critic_x = self.critic_fc3(critic_x)
         value = self.critic_out(critic_x)
         return policy, value
 
@@ -243,7 +249,6 @@ if __name__ == "__main__":
                 criticList.append(critic_loss)
 
             if done:
-                # 에피소드마다 학습 결과 출력
                 print("episode: {:3d} | score: {:.3f} | actorLoss : {:.3f} | criticLoss : {:.3f} | maxPlayTime : {:3d} | playTime : {:3d} | RerollCnt : {:3d}".format(
                       e, score, np.mean(actorList), np.mean(criticList), env.map.maxPlayTime, env.playTime, env.reRoll))
 
@@ -255,7 +260,6 @@ if __name__ == "__main__":
 
                 env.mapIdx = np.random.choice(range(0, ran), 1)[0]
 
-        # 100 에피소드마다 모델 저장
         if e % SAVEGRAPH == SAVEGRAPH-1:
             actorLossGraph.append(np.mean(actorLosses))
             criticLossGraph.append(np.mean(criticLosses))

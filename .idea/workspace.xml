@@ -4,15 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5b52e8d7-0ddb-4a69-856d-2c39f72d8b69" name="Changes" comment="version 6.0&#10;Sequential Training Update">
-      <change afterPath="$PROJECT_DIR$/Main/Train_PPO.py" afterDir="false" />
+    <list default="true" id="5b52e8d7-0ddb-4a69-856d-2c39f72d8b69" name="Changes" comment="version 6.1&#10;PPO Update">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main/Environment.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/Environment.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main/Save_graph/Graph.png" beforeDir="false" afterPath="$PROJECT_DIR$/Main/Save_graph/Graph.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main/Save_graph/Graph_Loss.png" beforeDir="false" afterPath="$PROJECT_DIR$/Main/Save_graph/Graph_Loss.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main/Save_graph/Graph_PlayTime.png" beforeDir="false" afterPath="$PROJECT_DIR$/Main/Save_graph/Graph_PlayTime.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main/Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/Test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main/Train_ActorCritic.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/Train_ActorCritic.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main/Train_PPO.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/Train_PPO.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +75,7 @@
       <recent name="C:\Practice\Reinforcement_LostArk\main" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.Environment">
+  <component name="RunManager" selected="Python.Train_PPO">
     <configuration name="AdversialPPO" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Reinforcement_LostArk" />
       <option name="ENV_FILES" value="" />
@@ -194,8 +188,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.Environment" />
         <item itemvalue="Python.Train_PPO" />
+        <item itemvalue="Python.Environment" />
         <item itemvalue="Python.AdversialPPO" />
         <item itemvalue="Python.a02.ppo_curriculum" />
         <item itemvalue="Python.Train_ActorCritic (1)" />
@@ -266,7 +260,15 @@
       <option name="project" value="LOCAL" />
       <updated>1712997827235</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="version 6.1&#10;PPO Update">
+      <option name="closed" value="true" />
+      <created>1713081659227</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1713081659227</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -287,6 +289,7 @@
     <MESSAGE value="version 5.1&#10;Filenames changed" />
     <MESSAGE value="version 5.2&#10;Bug fixed" />
     <MESSAGE value="version 6.0&#10;Sequential Training Update" />
-    <option name="LAST_COMMIT_MESSAGE" value="version 6.0&#10;Sequential Training Update" />
+    <MESSAGE value="version 6.1&#10;PPO Update" />
+    <option name="LAST_COMMIT_MESSAGE" value="version 6.1&#10;PPO Update" />
   </component>
 </project>
