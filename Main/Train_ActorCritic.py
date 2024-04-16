@@ -146,12 +146,11 @@ if __name__ == "__main__":
     # 액터-크리틱(A2C) 에이전트 생성
     agent = A2CAgent(action_size)
     if keepLearning:
-        agent.model.load_weights('Save_model/Model')
+        agent.model.load_weights('Save_model/PPOModel')
 
     tmpLosses, tmpPlayTimes = [], []
-    LossGraph, playtimeGraph = [], []
-    scores, episodes, playTimes = [], [], []
-    score_avg = 0
+    lossGraph, playtimeGraph = [], []
+    episodes = []
     ran = 5
 
     EPISODES = 100000
@@ -177,22 +176,17 @@ if __name__ == "__main__":
             state = nextState
 
             if done:
-                # 에피소드마다 학습 결과 출력
                 print("episode: {:3d} | score: {:.3f} | loss : {:.3f} | playTime : {:3d} | RerollCnt : {:3d}".format(
                       e, score, np.mean(loss_list), env.playTime, env.reRoll))
 
-                scores.append(np.mean(loss_list))
                 episodes.append(e)
-                playTimes.append(env.map.maxPlayTime - env.playTime)
-
                 tmpLosses.append(np.mean(loss_list))
                 tmpPlayTimes.append(env.playTime)
 
                 env.mapIdx = np.random.choice(range(0, ran), 1)[0]
 
-        # 100 에피소드마다 모델 저장
         if e % SAVEGRAPH == SAVEGRAPH-1:
-            LossGraph.append(np.mean(tmpLosses))
+            lossGraph.append(np.mean(tmpLosses))
             playtimeGraph.append(np.mean(tmpPlayTimes))
             tmpLosses, tmpPlayTimes = [], []
 
@@ -200,7 +194,7 @@ if __name__ == "__main__":
             ax1.plot(playtimeGraph, 'r')
             ax1.set_ylabel('PlayTime', color='red')
             ax2 = ax1.twinx()
-            ax2.plot(LossGraph, 'b')
+            ax2.plot(lossGraph, 'b')
             ax2.set_ylabel('Loss', color='blue')
             plt.savefig("./Save_graph/Graph.png")
             plt.close()
@@ -211,14 +205,14 @@ if __name__ == "__main__":
             plt.savefig("./Save_graph/Graph_PlayTime.png")
             plt.close()
 
-            plt.plot(LossGraph, 'b')
+            plt.plot(lossGraph, 'b')
             plt.xlabel("episode")
             plt.ylabel("Loss")
             plt.savefig("./Save_graph/Graph_Loss.png")
             plt.close()
 
         if e % SAVEMODEL == SAVEMODEL-1:
-            agent.model.save_weights('Save_model/Model', save_format='tf')
+            agent.model.save_weights('Save_model/PPOModel', save_format='tf')
 
         if e % STAGEUPDATER == STAGEUPDATER-1:
             if ran < len(list(MapType)):

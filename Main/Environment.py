@@ -32,6 +32,7 @@ class Env(tk.Tk):
         self.breakableTiles, self.brokenTile, self.distortTiles = [], [], []
         self.playTime = 0
         self.reRoll = self.map.reRoll
+        self.totalCnt, self.idxCnt = 0, 0
 
         self.reset()
 
@@ -252,6 +253,8 @@ class Env(tk.Tk):
         card = self.leftHand if hand == 0 else self.rightHand
         relocation = False
 
+        tileCntBeforeAction = len(self.breakableTiles)
+
         if hand == 0:
             self.leftHand = self.waitLine[0]
         elif hand == 1:
@@ -316,20 +319,17 @@ class Env(tk.Tk):
         self.Draw()
         self.render()
 
-        reward = 0
         if hand == 2:
             reward = 0
-        elif len(self.breakableTiles) == 0:
-            if self.map.maxPlayTime - self.playTime >= 0:
-                reward = 3
-            elif self.map.maxPlayTime - self.playTime >= -1:
-                reward = 2
-            elif self.map.maxPlayTime - self.playTime >= -3:
-                reward = 1
-            else:
-                reward = 0
-        elif self.map.maxPlayTime - self.playTime <= -3:
-            reward = -0.3
+        else:
+            self.totalCnt -= self.idxCnt
+            if self.totalCnt <= 0:
+                self.totalCnt = 0
+
+            reward = self.totalCnt - len(self.breakableTiles)
+            reward *= 0.15
+
+            # print(f'totalCnt : {self.totalCnt} | breakableTiles : {len(self.breakableTiles)} | reward : {reward}')
 
         return self.GetState(), reward, len(self.breakableTiles) == 0
 
@@ -369,6 +369,9 @@ class Env(tk.Tk):
         self.MapInfoUpdate()
         self.reRoll = self.map.reRoll
 
+        self.totalCnt = len(self.breakableTiles)
+        self.idxCnt = self.totalCnt / self.map.maxPlayTime
+
         self.Draw()
 
         return self.GetState()
@@ -379,7 +382,7 @@ class Env(tk.Tk):
         Info['reRoll'] = [self.reRoll]
         Info['cardInfo'] = [self.rightHand.cardType, self.rightHand.level, self.leftHand.cardType, self.leftHand.level,
                             self.waitLine[0].cardType, self.waitLine[1].cardType, self.waitLine[2].cardType]
-        Info['playTime'] = [self.playTime]
+        Info['playTime'] = [self.map.maxPlayTime - self.playTime]
 
         self.state_size = 0
         for key in list(Info.keys()):
@@ -398,31 +401,31 @@ class Env(tk.Tk):
         for y in range(len(space)):
             for x in range(len(space[0])):
                 tmp = []
-                tmp.append(space[y][x] if space[y][x] not in [TileType.BROKENTILE.value, TileType.DISTORTEDTILE.value, -1] else -1)
-                for card in cards:
-                    effect = card.effect
-                    reward = 0
-                    if space[y][x] != TileType.BROKENTILE.value and space[y][x] != TileType.DISTORTEDTILE.value:
-                        if card.cardType == CardType.THUNDERBOLT and len(self.breakableTiles) != 0:
-                            if card.level == 1:
-                                reward = (3 / len(self.breakableTiles))
-                            elif card.level == 2:
-                                reward = (5 / len(self.breakableTiles))
-                            else:
-                                reward = (7 / len(self.breakableTiles))
-                        else:
-                            for i in range(len(effect['percents'])):
-                                toX = x + effect['dx'][i]
-                                toY = y + effect['dy'][i]
-                                if self.map.WIDTH > toX >= 0 and self.map.HEIGHT > toY >= 0:
-                                    if space[toY][toX] in [TileType.BROKENTILE.value, -1]:
-                                        pass
-                                    elif space[toY][toX] == TileType.DISTORTEDTILE.value:
-                                        reward -= 3 * (effect['percents'][i] / 100)
-                                    else:
-                                        reward += effect['percents'][i] / 100
-
-                    tmp.append(reward)
+                tmp.append(space[y][x] if space[y][x] not in [TileType.BROKENTILE.value, -1] else -1)
+                # for card in cards:
+                #     effect = card.effect
+                #     reward = 0
+                #     if space[y][x] != TileType.BROKENTILE.value and space[y][x] != TileType.DISTORTEDTILE.value:
+                #         if card.cardType == CardType.THUNDERBOLT and len(self.breakableTiles) != 0:
+                #             if card.level == 1:
+                #                 reward = (3 / len(self.breakableTiles))
+                #             elif card.level == 2:
+                #                 reward = (5 / len(self.breakableTiles))
+                #             else:
+                #                 reward = (7 / len(self.breakableTiles))
+                #         else:
+                #             for i in range(len(effect['percents'])):
+                #                 toX = x + effect['dx'][i]
+                #                 toY = y + effect['dy'][i]
+                #                 if self.map.WIDTH > toX >= 0 and self.map.HEIGHT > toY >= 0:
+                #                     if space[toY][toX] in [TileType.BROKENTILE.value, -1]:
+                #                         pass
+                #                     elif space[toY][toX] == TileType.DISTORTEDTILE.value:
+                #                         reward -= 3 * (effect['percents'][i] / 100)
+                #                     else:
+                #                         reward += effect['percents'][i] / 100
+                #
+                #     tmp.append(reward)
                 ret.append(tmp)
         return ret
 

@@ -15,8 +15,6 @@ from tensorflow.keras.layers import Dropout
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.initializers import RandomUniform
 from Options import *
-import torch
-import torch.nn.functional as F
 
 
 # 정책 신경망과 가치 신경망 생성
@@ -198,7 +196,6 @@ class PPOAgent:
         nextState = self.flatter(nextState)
         self.memory.append([state, action, reward, nextState, done])
 
-keepLearning = False
 
 if __name__ == "__main__":
     env = Env(render_speed = 0.001)
@@ -208,10 +205,12 @@ if __name__ == "__main__":
     action_size = env.action_size
     mapSize = len(sum(env.action_space, []))
 
+    keepLearning = False
+
     # 액터-크리틱(A2C) 에이전트 생성
     agent = PPOAgent(action_size)
     if keepLearning:
-        agent.model.load_weights('Save_model/Model')
+        agent.model.load_weights('Save_model/PPOModel')
 
     actorLosses, criticLosses, playTimes = [], [], []
     actorLossGraph, criticLossGraph, playtimeGraph = [], [], []
