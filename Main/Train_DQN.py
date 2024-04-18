@@ -28,28 +28,29 @@ class DQN(keras.Model):
         self.drop1 = Dropout(0.2)
         self.fc2 = Dense(512, activation='leaky_relu')
         self.drop2 = Dropout(0.2)
-        self.fc3 = Dense(512, activation='leaky_relu')
+        self.fc3 = Dense(1028, activation='leaky_relu')
         self.drop3 = Dropout(0.2)
-        self.fc4 = Dense(512, activation='leaky_relu')
+        self.fc4 = Dense(1028, activation='leaky_relu')
         self.drop4 = Dropout(0.2)
-        self.fc5 = Dense(256, activation='leaky_relu')
+        self.fc5 = Dense(1028, activation='leaky_relu')
         self.drop5 = Dropout(0.2)
-        self.fc6 = Dense(128, activation='leaky_relu')
+        self.fc6 = Dense(512, activation='leaky_relu')
+        self.drop6 = Dropout(0.2)
+        self.fc7 = Dense(256, activation='leaky_relu')
+        self.drop7 = Dropout(0.2)
+        self.fc8 = Dense(128, activation='leaky_relu')
         self.fc_out = Dense(action_size,
                             kernel_initializer=RandomUniform(-1e-3, 1e-3))
 
     def call(self, x):
-        x = self.fc1(x)
-        x = self.drop1(x)
-        x = self.fc2(x)
-        x = self.drop2(x)
-        x = self.fc3(x)
-        x = self.drop3(x)
-        x = self.fc4(x)
-        x = self.drop4(x)
-        x = self.fc5(x)
-        x = self.drop5(x)
-        x = self.fc6(x)
+        x = self.fc1(x);    x = self.drop1(x)
+        x = self.fc2(x);    x = self.drop2(x)
+        x = self.fc3(x);    x = self.drop3(x)
+        x = self.fc4(x);    x = self.drop4(x)
+        x = self.fc5(x);    x = self.drop5(x)
+        x = self.fc6(x);    x = self.drop6(x)
+        x = self.fc7(x);    x = self.drop7(x)
+        x = self.fc8(x)
         q = self.fc_out(x)
         return q
 
@@ -63,7 +64,7 @@ class DQNAgent:
 
         # DQN 하이퍼파라미터
         self.discount_factor = 0.99
-        self.learning_rate = 0.001
+        self.learning_rate = 0.0001
         self.epsilon = 1.0
         self.epsilon_decay = 0.999
         self.epsilon_min = 0.01
@@ -193,6 +194,7 @@ if __name__ == "__main__":
     ran = 5
 
     EPISODES = 100000
+    # global episode,
     STAGEUPDATER = int(EPISODES / 10)
     SAVEMODEL = 100
     SAVEGRAPH = 10

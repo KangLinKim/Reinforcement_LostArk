@@ -4,17 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5b52e8d7-0ddb-4a69-856d-2c39f72d8b69" name="Changes" comment="version 6.2&#10;Reward, 12K episodes trained">
+    <list default="true" id="5b52e8d7-0ddb-4a69-856d-2c39f72d8b69" name="Changes" comment="version 7.0&#10;Rewarding standard modified, algorithm changed to DQN">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main/Card.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/Card.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Main/Environment.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/Environment.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main/Save_graph/PPO/Graph_PlayTime.png" beforeDir="false" afterPath="$PROJECT_DIR$/Main/Save_graph/PPO/Graph_PlayTime.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main/Save_graph/PPO/Graph_actorLoss.png" beforeDir="false" afterPath="$PROJECT_DIR$/Main/Save_graph/PPO/Graph_actorLoss.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main/Save_graph/PPO/Graph_criticLoss.png" beforeDir="false" afterPath="$PROJECT_DIR$/Main/Save_graph/PPO/Graph_criticLoss.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main/Save_model/Model.data-00000-of-00001" beforeDir="false" afterPath="$PROJECT_DIR$/Main/Save_model/Model.data-00000-of-00001" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main/Save_model/Model.index" beforeDir="false" afterPath="$PROJECT_DIR$/Main/Save_model/Model.index" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Main/Save_model/checkpoint" beforeDir="false" afterPath="$PROJECT_DIR$/Main/Save_model/checkpoint" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main/Train_ActorCritic.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/Train_ActorCritic.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main/Train_PPO.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/Train_PPO.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main/Train_DQN.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/Train_DQN.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,60 +49,39 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.AdversialPPO.executor": "Run",
-    "Python.DodgeAgent.executor": "Run",
-    "Python.Environment.executor": "Run",
-    "Python.Map.executor": "Run",
-    "Python.Test (1).executor": "Run",
-    "Python.Train_ActorCritic (1).executor": "Run",
-    "Python.Train_DQN.executor": "Run",
-    "Python.Train_PPO.executor": "Run",
-    "Python.Train_Reinforce.executor": "Run",
-    "Python.a02.ppo_curriculum.executor": "Run",
-    "Python.a02.ppo_random_params.executor": "Run",
-    "Python.environment.executor": "Run",
-    "Python.test.executor": "Run",
-    "Python.train_ActorCritic (1).executor": "Run",
-    "Python.train_ActorCritic.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Practice/Reinforcement_LostArk/Main/Train_Reinforce.py",
-    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.Console Colors",
-    "two.files.diff.last.used.file": "C:/Practice/Reinforcement_LostArk/Main/Train_Reinforce.py"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.AdversialPPO.executor&quot;: &quot;Run&quot;,
+    &quot;Python.DodgeAgent.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Environment.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Map.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Test (1).executor&quot;: &quot;Run&quot;,
+    &quot;Python.Train_ActorCritic (1).executor&quot;: &quot;Run&quot;,
+    &quot;Python.Train_DQN.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Train_DQN_Distribute.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Train_PPO.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Train_Reinforce.executor&quot;: &quot;Run&quot;,
+    &quot;Python.a02.ppo_curriculum.executor&quot;: &quot;Run&quot;,
+    &quot;Python.a02.ppo_random_params.executor&quot;: &quot;Run&quot;,
+    &quot;Python.environment.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test.executor&quot;: &quot;Run&quot;,
+    &quot;Python.train_ActorCritic (1).executor&quot;: &quot;Run&quot;,
+    &quot;Python.train_ActorCritic.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Practice/Reinforcement_LostArk/Main/Train_Reinforce.py&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.Console Colors&quot;,
+    &quot;two.files.diff.last.used.file&quot;: &quot;C:/Practice/Reinforcement_LostArk/Main/Train_Reinforce.py&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Practice\Reinforcement_LostArk\main" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.Train_DQN">
-    <configuration name="AdversialPPO" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Reinforcement_LostArk" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="D:/unity/Reinforce Learning Projects/Agents" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="D:/unity/Reinforce Learning Projects/Agents/AdversialPPO.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Python.Train_DQN_Distribute">
     <configuration name="Environment" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Reinforcement_LostArk" />
       <option name="ENV_FILES" value="" />
@@ -174,6 +148,28 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="Train_DQN_Distribute" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Reinforcement_LostArk" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Main" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Main/Train_DQN_Distribute.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="Train_PPO" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Reinforcement_LostArk" />
       <option name="ENV_FILES" value="" />
@@ -198,11 +194,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.Train_DQN_Distribute" />
         <item itemvalue="Python.Train_DQN" />
         <item itemvalue="Python.Train_PPO" />
         <item itemvalue="Python.Train_ActorCritic (1)" />
         <item itemvalue="Python.Environment" />
-        <item itemvalue="Python.AdversialPPO" />
       </list>
     </recent_temporary>
   </component>
@@ -286,7 +282,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713106426964</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="version 7.0&#10;Rewarding standard modified, algorithm changed to DQN">
+      <option name="closed" value="true" />
+      <created>1713268022414</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1713268022414</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -309,6 +313,7 @@
     <MESSAGE value="version 6.0&#10;Sequential Training Update" />
     <MESSAGE value="version 6.1&#10;PPO Update" />
     <MESSAGE value="version 6.2&#10;Reward, 12K episodes trained" />
-    <option name="LAST_COMMIT_MESSAGE" value="version 6.2&#10;Reward, 12K episodes trained" />
+    <MESSAGE value="version 7.0&#10;Rewarding standard modified, algorithm changed to DQN" />
+    <option name="LAST_COMMIT_MESSAGE" value="version 7.0&#10;Rewarding standard modified, algorithm changed to DQN" />
   </component>
 </project>

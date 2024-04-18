@@ -1,2 +1,2 @@
-model_checkpoint_path: "DQNModel"
-all_model_checkpoint_paths: "DQNModel"
+model_checkpoint_path: "DQNModel_Distribute Version"
+all_model_checkpoint_paths: "DQNModel_Distribute Version"

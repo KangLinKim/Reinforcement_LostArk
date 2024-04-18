@@ -9,8 +9,8 @@ class Card:
         self.level = cardLevel
         self.maxLevel = 3 if (
                 self.cardType != CardType.WORLDTREE.value and self.cardType != CardType.ERUPTION.value) else 1
-        self.imageList = self.LoadCardImages()
-        self.image = self.imageList[card]
+        # self.imageList = self.LoadCardImages()
+        # self.image = self.imageList[card]
         self.effect = self.CardEffect()
 
     def LevelUp(self):

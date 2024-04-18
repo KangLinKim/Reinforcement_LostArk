@@ -27,7 +27,7 @@ class Env(tk.Tk):
         self.title('Toy Project by Lin')
         self.geometry('{0}x{1}'.format(self.map.WIDTH * UNIT, (self.map.HEIGHT + 2) * UNIT))
         self.tileImages = self.LoadTileImages()
-        self.canvas = self.DrawCanvas()
+        # self.canvas = self.DrawCanvas()
 
         self.breakableTiles, self.brokenTile, self.distortTiles = [], [], []
         self.playTime = 0
@@ -85,9 +85,10 @@ class Env(tk.Tk):
                                              image=self.tileImages[tile])
 
     def Draw(self):
-        self.DrawGrid()
-        self.DrawMapImg()
-        self.DrawCardImg()
+        return
+        # self.DrawGrid()
+        # self.DrawMapImg()
+        # self.DrawCardImg()
 
     def TileBreak(self, hand, card, posX, posY):
         tile = self.action_space[posY][posX]
@@ -317,7 +318,6 @@ class Env(tk.Tk):
 
         self.MapInfoUpdate()
         self.Draw()
-        self.render()
 
         if hand == 2:
             reward = 0
@@ -357,7 +357,7 @@ class Env(tk.Tk):
         self.specialTile = []
 
     def reset(self):
-        self.update()
+        # self.update()
 
         self.playTime = 0
 
