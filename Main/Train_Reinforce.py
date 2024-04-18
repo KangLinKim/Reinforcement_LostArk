@@ -1,18 +1,5 @@
-import os
-
-import matplotlib.pyplot as plt
-
-os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
-
-import copy
-import matplotlib.pyplot as plt
-import random
-import numpy as np
 from Environment import Env
-import tensorflow as tf
-from tensorflow.keras.layers import Dense
-from tensorflow.keras.optimizers import Adam
+from Options import *
 
 
 # 상태가 입력, 각 행동의 확률이 출력인 인공신경망 생성

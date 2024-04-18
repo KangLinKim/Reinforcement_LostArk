@@ -1,8 +1,26 @@
-import time
+import os
+os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
+
+import sys
+import gym
+import pylab
+import random
 import numpy as np
+import threading
+import time
 import tkinter as tk
 from PIL import ImageTk, Image
 from enum import Enum
+import matplotlib.pyplot as plt
+from collections import deque
+
+import tensorflow as tf
+from tensorflow.python import keras
+from tensorflow.keras.layers import Dense
+from tensorflow.keras.layers import Dropout
+from tensorflow.keras.optimizers import Adam
+from tensorflow.keras.initializers import RandomUniform
 
 
 class CardType(Enum):

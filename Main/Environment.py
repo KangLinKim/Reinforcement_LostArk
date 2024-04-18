@@ -319,17 +319,24 @@ class Env(tk.Tk):
         self.MapInfoUpdate()
         self.Draw()
 
+        tileCntAfterAction = len(self.breakableTiles)
+
+        cutLine = self.map.maxPlayTime - self.playTime
         if hand == 2:
             reward = 0
         else:
-            self.totalCnt -= self.idxCnt
-            if self.totalCnt <= 0:
-                self.totalCnt = 0
-
-            reward = self.totalCnt - len(self.breakableTiles)
-            reward *= 0.15
-
-            # print(f'totalCnt : {self.totalCnt} | breakableTiles : {len(self.breakableTiles)} | reward : {reward}')
+            tileCnt = tileCntBeforeAction - tileCntAfterAction
+            reward = tileCnt * 0.1
+            if len(self.breakableTiles) == 0:
+                if cutLine >= 0:
+                    reward += 3
+                elif cutLine >= -1:
+                    reward += 2
+                elif cutLine >= -3:
+                    reward += 1
+            else:
+                if cutLine < 0:
+                    reward -= 0.5
 
         return self.GetState(), reward, len(self.breakableTiles) == 0
 
