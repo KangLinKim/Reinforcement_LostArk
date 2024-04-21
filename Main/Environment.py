@@ -250,7 +250,11 @@ class Env(tk.Tk):
             hand = 0
             pos = action
 
-        pos = [int(pos % self.map.WIDTH), int(pos / self.map.WIDTH)]
+        pos = [int(pos % self.map.WIDTH), int(pos / self.map.WIDTH)]    # [x, y]
+        if hand != 2 and self.action_space[pos[1]][pos[0]] in [TileType.BROKENTILE.value, TileType.DISTORTEDTILE.value, -1] or\
+            hand == 2 and self.reRoll <= 0:
+                return self.GetState(), -1, len(self.breakableTiles) == 0
+
         card = self.leftHand if hand == 0 else self.rightHand
         relocation = False
 

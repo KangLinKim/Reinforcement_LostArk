@@ -4,7 +4,7 @@ from Options import *
 global episode, score_avg, EPISODES, STAGEUPDATER
 episode, score_avg = 0, 0
 
-EPISODES = 7000000
+EPISODES = 210000
 STAGEUPDATER = int(EPISODES / 10)
 
 # 상태가 입력, 큐함수가 출력인 인공신경망 생성
@@ -15,17 +15,13 @@ class DQN(keras.Model):
         self.drop1 = Dropout(0.2)
         self.fc2 = Dense(512, activation='leaky_relu')
         self.drop2 = Dropout(0.2)
-        self.fc3 = Dense(1028, activation='leaky_relu')
+        self.fc3 = Dense(512, activation='leaky_relu')
         self.drop3 = Dropout(0.2)
-        self.fc4 = Dense(1028, activation='leaky_relu')
+        self.fc4 = Dense(512, activation='leaky_relu')
         self.drop4 = Dropout(0.2)
-        self.fc5 = Dense(1028, activation='leaky_relu')
+        self.fc5 = Dense(256, activation='leaky_relu')
         self.drop5 = Dropout(0.2)
-        self.fc6 = Dense(512, activation='leaky_relu')
-        self.drop6 = Dropout(0.2)
-        self.fc7 = Dense(256, activation='leaky_relu')
-        self.drop7 = Dropout(0.2)
-        self.fc8 = Dense(128, activation='leaky_relu')
+        self.fc6 = Dense(128, activation='leaky_relu')
         self.fc_out = Dense(action_size,
                             kernel_initializer=RandomUniform(-1e-3, 1e-3))
 
@@ -35,9 +31,7 @@ class DQN(keras.Model):
         x = self.fc3(x);    x = self.drop3(x)
         x = self.fc4(x);    x = self.drop4(x)
         x = self.fc5(x);    x = self.drop5(x)
-        x = self.fc6(x);    x = self.drop6(x)
-        x = self.fc7(x);    x = self.drop7(x)
-        x = self.fc8(x)
+        x = self.fc6(x);
         q = self.fc_out(x)
         return q
 
@@ -53,7 +47,7 @@ class DQNAgent:
         self.epsilon = 1.0
         self.epsilon_decay = 0.999
         self.epsilon_min = 0.01
-        self.threads = 128
+        self.threads = 32
 
         # 모델과 타깃 모델 생성
         self.global_model = DQN(self.action_size)
@@ -129,29 +123,13 @@ class Runner(threading.Thread):
         reRollCnt = state['reRoll'][0]
 
         if np.random.rand() <= self.epsilon:
-            lst = [1 if mapInfo[i][0] not in [TileType.BROKENTILE.value, TileType.DISTORTEDTILE.value, -1] else 0
-                   for i in range(len(mapInfo))]
-            lst.append(1 if reRollCnt > 0 else 0)
-            lst = [i / np.sum(lst) for i in lst]
-            return np.random.choice(self.action_size, 1, p=lst)[0]
+            return random.randrange(self.action_size)
 
         else:
             state = self.flatter(state)
             q_value = self.local_model(state)[0]
 
-            lst = [q_value[i] if mapInfo[i][0] not in [TileType.BROKENTILE.value, TileType.DISTORTEDTILE.value, -1] else 0
-                for i in range(len(q_value) - 1)]
-            lst.append(q_value[len(q_value) - 1] if reRollCnt > 0 else 0)
-
-            if np.sum(lst) != 0:
-                lst = [i / np.sum(lst) for i in lst]
-                return np.argmax(lst)
-            else:
-                lst = [1 if mapInfo[i][0] not in [TileType.BROKENTILE.value, TileType.DISTORTEDTILE.value, -1] else 0
-                       for i in range(len(lst) - 1)]
-                lst.append(1 if reRollCnt > 0 else 0)
-                lst = [i / np.sum(lst) for i in lst]
-                return np.random.choice(self.action_size, 1, p=lst)[0]
+            return np.argmax(q_value)
 
 
     # 샘플 <s, a, r, s'>을 리플레이 메모리에 저장
