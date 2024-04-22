@@ -280,7 +280,7 @@ class Env(tk.Tk):
                     )
                 )
                 relocation = self.TileBreak(hand, card, pos[0], pos[1])
-                # self.action_space[pos[1]][pos[0]] = TileType.BROKENTILE.value
+                self.action_space[pos[1]][pos[0]] = TileType.BROKENTILE.value
 
                 # 재생성
                 if cnt == 0:
@@ -368,8 +368,6 @@ class Env(tk.Tk):
         self.specialTile = []
 
     def reset(self):
-        # self.update()
-
         self.playTime = 0
 
         # 카드 초기화

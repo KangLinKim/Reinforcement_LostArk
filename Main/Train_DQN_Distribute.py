@@ -6,6 +6,7 @@ episode, score_avg = 0, 0
 
 EPISODES = 210000
 STAGEUPDATER = int(EPISODES / 10)
+STAGEUPDATER = 20
 
 # 상태가 입력, 큐함수가 출력인 인공신경망 생성
 class DQN(keras.Model):
@@ -220,12 +221,12 @@ class Runner(threading.Thread):
                 if done:
                     episode += 1
                     self.draw_tensorboard(score, np.mean(lossList), episode)
-                    print("Actor : {:3d} | episode: {:3d} | score: {:.3f} | loss : {:.3f} | maxPlayTime : {:3d} | playTime : {:3d} | RerollCnt : {:3d}".format(
-                            self.id, episode, score, np.mean(lossList), self.env.map.maxPlayTime, self.env.playTime, self.env.reRoll))
+                    print("Actor : {:3d} | episode: {:3d} | score: {:.2f} | loss : {:.5f} | maxPlayTime : {:3d} | playTime : {:3d} | stageLevel : {:3d} | RerollCnt : {:3d}".format(
+                            self.id, episode, score, np.mean(lossList), self.env.map.maxPlayTime, self.env.playTime, self.stageLevel, self.env.reRoll))
 
-        if episode % STAGEUPDATER == STAGEUPDATER - 1:
-            if self.stageLevel * 5 < len(list(MapType)):
-                self.stageLevel += 1
+            if episode % STAGEUPDATER == STAGEUPDATER - 1:
+                if self.stageLevel * 5 < len(list(MapType)):
+                    self.stageLevel += 1
 
 
 if __name__ == "__main__":
